@@ -23,3 +23,8 @@ resource "google_project_service" "enable_googleapis_sqladmin" {
   project = var.project_id
   service = "sqladmin.googleapis.com"
 }
+
+resource "google_project_service" "enable_googleapis_containerregistry" {
+  project = var.project_id
+  service = "containerregistry.googleapis.com"
+}
