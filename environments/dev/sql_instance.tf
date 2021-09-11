@@ -1,19 +1,4 @@
 
-resource "google_compute_global_address" "private_ip_postgresql" {
-  name          = "google-managed-services-default"
-  description   = "IP Range for peer networks."
-  purpose       = "VPC_PEERING"
-  address_type  = "INTERNAL"
-  prefix_length = 20
-  network       = "default"
-}
-
-resource "google_service_networking_connection" "cloudsql-postgres-googleapis-com" {
-  network                 = "default"
-  service                 = "servicenetworking.googleapis.com"
-  reserved_peering_ranges = [google_compute_global_address.private_ip_postgresql.name]
-}
-
 resource "random_id" "db_name_suffix" {
   byte_length = 4
 }
