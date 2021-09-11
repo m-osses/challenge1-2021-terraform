@@ -33,3 +33,8 @@ resource "google_project_service" "enable_googleapis_cloudresourcemanager" {
   project = var.project_id
   service = "cloudresourcemanager.googleapis.com"
 }
+
+resource "google_project_service" "enable_googleapis_container_gke" {
+  project = var.project_id
+  service = "container.googleapis.com"
+}
