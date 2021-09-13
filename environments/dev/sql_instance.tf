@@ -1,4 +1,22 @@
 
+resource "google_compute_global_address" "sql_private_ip_address" {
+  provider = google-beta
+
+  name          = "private-ip-address"
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  prefix_length = 16
+  network       = "default"
+}
+
+resource "google_service_networking_connection" "sql_private_vpc_connection" {
+  provider = google-beta
+
+  network                 = "default"
+  service                 = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [google_compute_global_address.sql_private_ip_address.name]
+}
+
 resource "random_id" "db_name_suffix" {
   byte_length = 4
 }
@@ -7,6 +25,9 @@ resource "google_sql_database_instance" "master" {
   name             = "master-instance-${random_id.db_name_suffix.hex}"
   database_version = "POSTGRES_12"
   region           = var.region
+
+
+  depends_on = [google_service_networking_connection.sql_private_vpc_connection]
 
   settings {
     # Second-generation instance tiers are based on the machine
