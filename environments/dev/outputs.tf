@@ -13,6 +13,10 @@ output "project_id" {
   description = "GCloud Project ID"
 }
 
+output "sql_instance_-private_ip" {
+  value = google_compute_global_address.sql_private_ip_address.name
+}
+
 output "kubernetes_cluster_name" {
   value       = google_container_cluster.primary.name
   description = "GKE Cluster Name"
