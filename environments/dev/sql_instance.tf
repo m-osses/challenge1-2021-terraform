@@ -17,12 +17,12 @@ resource "google_service_networking_connection" "sql_private_vpc_connection" {
   reserved_peering_ranges = [google_compute_global_address.sql_private_ip_address.name]
 }
 
-resource "random_id" "db_name_suffix" {
-  byte_length = 4
+resource "random_id" "db_instance_name_suffix" {
+  byte_length = 5
 }
 
 resource "google_sql_database_instance" "master" {
-  name             = "master-instance-${random_id.db_name_suffix.hex}"
+  name             = "master-instance-${random_id.db_instance_name_suffix.hex}"
   database_version = "POSTGRES_12"
   region           = var.region
 
