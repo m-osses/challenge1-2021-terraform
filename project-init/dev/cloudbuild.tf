@@ -52,5 +52,5 @@ resource "google_cloudbuild_trigger" "github_code_main_pr_trigger" {
       branch = "main"
     }
   }
-  filename = "cloudbuild.yaml"
+  filename = "cloudbuild-pr.yaml"
 }
