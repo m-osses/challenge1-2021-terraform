@@ -14,7 +14,7 @@ output "project_id" {
 }
 
 output "sql_instance_-private_ip" {
-  value = google_compute_global_address.sql_private_ip_address.name
+  value = google_compute_global_address.sql_private_ip_address.address
 }
 
 output "kubernetes_cluster_name" {
